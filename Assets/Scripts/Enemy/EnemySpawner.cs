@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using ShoterProject.Enemy;
 using UnityEngine;
 
 namespace EnemySpawner
+
 {
 
     public class EnemySpawner : MonoBehaviour
@@ -12,14 +11,6 @@ namespace EnemySpawner
         [SerializeField] private float spawnStep = 1f;
 
         private float nextSpawnTime;
-        
-
-
-
-        void Start()
-        {
-
-        }
 
         void Update()
         {
@@ -28,7 +19,6 @@ namespace EnemySpawner
                 var enemy = Instantiate(enemyPrefab , transform);
                 nextSpawnTime = Time.time + spawnStep;
             }
-           
 
         }
     }

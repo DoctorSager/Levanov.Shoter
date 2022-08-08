@@ -1,37 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-namespace Movement
+namespace ShoterProject
 {
 
     public class Movement : MonoBehaviour
     {
 
-        [SerializeField] private float Speed = 3f;
-        [SerializeField] private float UpSpeed = 5f;
 
-        private const string Horizontal = "Horizontal";
-        private const string Vertical = "Vertical";
-        private const string Running = "Running";
+        public float walkSpeed = 2;
+        public float runSpeed = 6;
 
+        public float turnSmoothTime = 0.2f;
+        float turnSmoothVelocity;
 
-        private Vector3 direction;
-        private bool IsRunning;
+        public float speedSmoothTime = 0.1f;
+        float speedSmoothVelocity;
+        float currentSpeed;
 
+        Transform cameraT;
 
-        void Update()
+        private void Start()
         {
-
-            direction.x = Input.GetAxis(Horizontal);
-            direction.z = Input.GetAxis(Vertical);
-
-            IsRunning = Input.GetButton(Running);
-
-            transform.position += direction * ((IsRunning ? UpSpeed : Speed) * Time.deltaTime);
-
+            cameraT = Camera.main.transform;
         }
 
+        private void Update()
+        {
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 inputDir = input.normalized;
+
+            if (inputDir != Vector2.zero)
+            {
+                float targetRotation = (Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg) + cameraT.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+
+            }
+
+            bool running = Input.GetKey(KeyCode.LeftShift);
+            float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
+            currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+
+            transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+
+           
+        }
     }
 }

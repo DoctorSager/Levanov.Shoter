@@ -499,9 +499,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3022078499591263449}
   - component: {fileID: 140402958}
-  - component: {fileID: -1382194276773113356}
+  - component: {fileID: 1699054028783942136}
+  - component: {fileID: -6012428177200944156}
   m_Layer: 0
-  m_Name: firstEnemy
+  m_Name: EnemyForSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +547,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 298840443772270365}
   spawnStep: 3
   angularSpeed: 5
---- !u!114 &-1382194276773113356
+--- !u!114 &1699054028783942136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -558,7 +559,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6edd18d5aa34646be842d2d0479092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 100
+  currentHealth: 100
+--- !u!114 &-6012428177200944156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286779728204155715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bab467c28e6412da0f6b0735c65063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6963906356518693338
 GameObject:
   m_ObjectHideFlags: 0
